@@ -46,22 +46,23 @@ int main()
 		for (int i = 0; i < 5; i++)
 		{ if (shoot[i] == 0) { x2[i] = x1; } }
 		if (_kbhit()) {
-			fflush(stdin);
 			ch = _getch();
 			if (ch == 'a') { moving = 1; }
 			if (ch == 'd') { moving = 2; }
 			if (ch == 's') { moving = 0; }
-			if (ch == ' ' && count <= 4) { ++count; shoot[count] = 1; }
+			if (ch == ' ' && count < 4) { ++count; shoot[count] = 1; }
 		}
 		if (moving == 1 && x1 > 0) { delete_ship(x1, y1); draw_ship(--x1, y1); }
 		if (moving == 2 && x1 < 75) { delete_ship(x1, y1); draw_ship(++x1, y1); }
 		for (int j = 0; j <= 4; j++)
 		{
 			if (shoot[j] == 1 && y2[j] > 0) { delete_ammo(x2[j], y2[j]); draw_ammo(x2[j], --y2[j]); }
-			if (y2[0] == 1) { delete_ammo(x2[0], y2[0]); shoot[0] = 0; y2[0] = y1; --count;
-				for (int a = 1; a<=4 ; a++) {shoot[a - 1] = shoot[a]; y2[a - 1] = y2[a]; x2[a - 1] = x2[a];}
-			}
 		}
+		if (y2[0] == 1) {delete_ammo(x2[0], y2[0]); shoot[0] = 0; y2[0] = y1; --count;
+						for (int a = 1; a <= 4; a++) { shoot[a - 1] = shoot[a]; y2[a - 1] = y2[a]; x2[a - 1] = x2[a]; }
+						shoot[4] = 0; y2[4] = y1; x2[4] = x1;
+		}
+		fflush(stdin);
 		Sleep(100);
 	} while (ch != 'x');
 	return 0;
