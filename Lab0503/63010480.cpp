@@ -58,9 +58,8 @@ int main()
 			if (shoot[j] == 1 && y2[j] > 0) { delete_ammo(x2[j], y2[j]); draw_ammo(x2[j], --y2[j]); }
 		}
 		if (y2[0] == 1) {delete_ammo(x2[0], y2[0]); --count;
-						for (int a = 1; a <= 4; a++) { shoot[a - 1] = shoot[a]; y2[a - 1] = y2[a]; x2[a - 1] = x2[a]; }
-						shoot[4] = 0; y2[4] = y1; x2[4] = x1;
-}
+			for (int a = 1; a < 5; a++) { shoot[a - 1] = shoot[a]; y2[a - 1] = y2[a]; x2[a - 1] = x2[a]; }
+			shoot[4] = 0; y2[4] = y1; x2[4] = x1;}
 		fflush(stdin);
 		Sleep(100);
 	} while (ch != 'x');
